@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alex Reyes — HR Professional</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream:    #F5F0E8;
+      --sand:     #E8DFD0;
+      --warm-mid: #C9B99A;
+      --espresso: #2C1F14;
+      --coffee:   #5C3D2E;
+      --terracotta: #C1674A;
+      --sage:     #6B7C6B;
+      --gold:     #B8964A;
+      --text:     #2C1F14;
+      --muted:    #7A6A5A;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.25rem 4rem;
+      background: rgba(245,240,232,0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(200,185,160,0.4);
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      letter-spacing: 0.04em;
+      color: var(--espresso);
+    }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--terracotta); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding-top: 5rem;
+    }
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 6rem 4rem 6rem 6rem;
+      position: relative;
+    }
+    .hero-eyebrow {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.7s 0.2s forwards;
+    }
+    .hero-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 5vw, 5.5rem);
+      line-height: 1.05;
+      color: var(--espresso);
+      margin-bottom: 1.75rem;
+      opacity: 0;
+      animation: fadeUp 0.7s 0.4s forwards;
+    }
+    .hero-name em {
+      font-style: italic;
+      color: var(--terracotta);
+    }
+    .hero-tagline {
+      font-size: 1.05rem;
+      line-height: 1.75;
+      color: var(--muted);
+      max-width: 38ch;
+      margin-bottom: 3rem;
+      opacity: 0;
+      animation: fadeUp 0.7s 0.6s forwards;
+    }
+    .hero-ctas {
+      display: flex; gap: 1rem;
+      opacity: 0;
+      animation: fadeUp 0.7s 0.8s forwards;
+    }
+    .btn-primary {
+      padding: 0.85rem 2rem;
+      background: var(--espresso);
+      color: var(--cream);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: none; cursor: pointer;
+      transition: background 0.25s, transform 0.2s;
+    }
+    .btn-primary:hover { background: var(--terracotta); transform: translateY(-2px); }
+    .btn-outline {
+      padding: 0.85rem 2rem;
+      background: transparent;
+      color: var(--espresso);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: 1.5px solid var(--espresso);
+      cursor: pointer;
+      transition: background 0.25s, color 0.25s, transform 0.2s;
+    }
+    .btn-outline:hover { background: var(--espresso); color: var(--cream); transform: translateY(-2px); }
+
+    .hero-right {
+      position: relative;
+      background: var(--sand);
+      overflow: hidden;
+    }
+    .hero-pattern {
+      position: absolute; inset: 0;
+      background-image:
+        repeating-linear-gradient(45deg, transparent, transparent 34px, rgba(193,103,74,0.07) 34px, rgba(193,103,74,0.07) 35px),
+        repeating-linear-gradient(-45deg, transparent, transparent 34px, rgba(193,103,74,0.07) 34px, rgba(193,103,74,0.07) 35px);
+    }
+    .hero-stat-stack {
+      position: absolute;
+      bottom: 3rem; left: 3rem; right: 3rem;
+      display: flex; gap: 1rem;
+    }
+    .hero-stat {
+      flex: 1;
+      background: rgba(245,240,232,0.9);
+      padding: 1.5rem;
+      border-left: 3px solid var(--terracotta);
+      opacity: 0;
+      animation: fadeUp 0.7s forwards;
+    }
+    .hero-stat:nth-child(1) { animation-delay: 1s; }
+    .hero-stat:nth-child(2) { animation-delay: 1.15s; }
+    .hero-stat:nth-child(3) { animation-delay: 1.3s; }
+    .hero-stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.4rem;
+      color: var(--espresso);
+      line-height: 1;
+      margin-bottom: 0.3rem;
+    }
+    .hero-stat-label {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .hero-img-placeholder {
+      position: absolute;
+      top: 3rem; right: 3rem; left: 3rem;
+      bottom: 11rem;
+      background: linear-gradient(160deg, var(--warm-mid) 0%, var(--coffee) 100%);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .hero-img-icon {
+      width: 90px; height: 90px;
+      border-radius: 50%;
+      background: rgba(245,240,232,0.25);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.5rem;
+    }
+
+    /* ── SECTIONS SHARED ── */
+    section { padding: 7rem 0; }
+    .section-inner { max-width: 1120px; margin: 0 auto; padding: 0 4rem; }
+    .section-label {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      margin-bottom: 0.75rem;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      line-height: 1.15;
+      color: var(--espresso);
+      margin-bottom: 1.5rem;
+    }
+    .section-divider {
+      width: 48px; height: 2px;
+      background: var(--terracotta);
+      margin-bottom: 3.5rem;
+    }
+
+    /* ── BIO ── */
+    #bio { background: #fff; }
+    .bio-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 6rem; align-items: start; }
+    .bio-text p {
+      font-size: 1rem;
+      line-height: 1.85;
+      color: var(--muted);
+      margin-bottom: 1.25rem;
+    }
+    .bio-text p strong { color: var(--espresso); font-weight: 500; }
+    .bio-pills { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 2rem; }
+    .pill {
+      padding: 0.4rem 1rem;
+      background: var(--cream);
+      border: 1px solid var(--warm-mid);
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      color: var(--coffee);
+    }
+    .bio-aside { display: flex; flex-direction: column; gap: 1.5rem; }
+    .bio-card {
+      background: var(--cream);
+      padding: 1.75rem 2rem;
+      border-top: 3px solid var(--gold);
+    }
+    .bio-card-title {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+    .bio-card-value {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      color: var(--espresso);
+    }
+
+    /* ── WINS ── */
+    #wins { background: var(--espresso); }
+    #wins .section-label { color: var(--terracotta); }
+    #wins .section-title { color: var(--cream); }
+    #wins .section-divider { background: var(--gold); }
+    .wins-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5px; background: rgba(255,255,255,0.08); }
+    .win-card {
+      background: var(--espresso);
+      padding: 2.5rem;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.3s;
+    }
+    .win-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--terracotta);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+    .win-card:hover { background: #3a2a1c; }
+    .win-card:hover::before { transform: scaleX(1); }
+    .win-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.5rem;
+      color: var(--terracotta);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+    .win-title {
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--cream);
+      margin-bottom: 0.75rem;
+    }
+    .win-desc {
+      font-size: 0.875rem;
+      line-height: 1.7;
+      color: rgba(245,240,232,0.55);
+    }
+
+    /* ── TECH STACK ── */
+    #tech { background: var(--cream); }
+    .tech-categories { display: flex; flex-direction: column; gap: 3rem; }
+    .tech-category-title {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 1px solid var(--sand);
+    }
+    .tech-row { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+    .tech-chip {
+      display: flex; align-items: center; gap: 0.6rem;
+      padding: 0.65rem 1.25rem;
+      background: #fff;
+      border: 1.5px solid var(--sand);
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--espresso);
+      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+      cursor: default;
+    }
+    .tech-chip:hover {
+      border-color: var(--terracotta);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(193,103,74,0.12);
+    }
+    .tech-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--sand); }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start; }
+    .contact-intro {
+      font-size: 1rem;
+      line-height: 1.85;
+      color: var(--muted);
+      margin-bottom: 2.5rem;
+    }
+    .contact-links { display: flex; flex-direction: column; gap: 1rem; }
+    .contact-link {
+      display: flex; align-items: center; gap: 1rem;
+      text-decoration: none;
+      color: var(--espresso);
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .contact-link:hover { color: var(--terracotta); }
+    .contact-link-icon {
+      width: 40px; height: 40px;
+      background: var(--cream);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      transition: background 0.2s;
+    }
+    .contact-link:hover .contact-link-icon { background: var(--terracotta); color: #fff; }
+
+    .contact-form { display: flex; flex-direction: column; gap: 1.25rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+    .form-label {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .form-input, .form-textarea {
+      padding: 0.85rem 1rem;
+      background: var(--cream);
+      border: 1.5px solid var(--warm-mid);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      color: var(--espresso);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .form-input:focus, .form-textarea:focus { border-color: var(--terracotta); }
+    .form-textarea { resize: vertical; min-height: 130px; }
+    .form-submit {
+      align-self: flex-start;
+      padding: 0.9rem 2.5rem;
+      background: var(--espresso);
+      color: var(--cream);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border: none; cursor: pointer;
+      transition: background 0.25s, transform 0.2s;
+    }
+    .form-submit:hover { background: var(--terracotta); transform: translateY(-2px); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--espresso);
+      padding: 2rem 4rem;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .footer-name {
+      font-family: 'Playfair Display', serif;
+      color: var(--cream);
+      font-size: 0.95rem;
+    }
+    .footer-copy {
+      font-size: 0.72rem;
+      color: rgba(245,240,232,0.4);
+      letter-spacing: 0.06em;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── SCROLL REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 1.1rem 2rem; }
+      .nav-links { gap: 1.5rem; }
+      .hero { grid-template-columns: 1fr; }
+      .hero-right { min-height: 320px; }
+      .hero-left { padding: 5rem 2rem 3rem; }
+      .hero-stat-stack { flex-direction: row; flex-wrap: wrap; }
+      .bio-grid, .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .wins-grid { grid-template-columns: 1fr; }
+      .section-inner { padding: 0 2rem; }
+      .form-row { grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Alex Reyes</div>
+  <ul class="nav-links">
+    <li><a href="#bio">About</a></li>
+    <li><a href="#wins">Wins</a></li>
+    <li><a href="#tech">Tech Stack</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-left">
+    <p class="hero-eyebrow">Human Resources · Talent &amp; People Operations</p>
+    <h1 class="hero-name">Alex<br><em>Reyes</em></h1>
+    <p class="hero-tagline">Building workplaces where people do the best work of their lives — through strategic hiring, inclusive culture, and smart HR systems.</p>
+    <div class="hero-ctas">
+      <a href="#contact" class="btn-primary">Get in Touch</a>
+      <a href="#wins" class="btn-outline">View My Work</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-pattern"></div>
+    <div class="hero-img-placeholder">
+      <div class="hero-img-icon">👤</div>
+    </div>
+    <div class="hero-stat-stack">
+      <div class="hero-stat">
+        <div class="hero-stat-num">8+</div>
+        <div class="hero-stat-label">Years in HR</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">400+</div>
+        <div class="hero-stat-label">Placements</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">92%</div>
+        <div class="hero-stat-label">Retention Rate</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BIO -->
+<section id="bio">
+  <div class="section-inner">
+    <div class="bio-grid">
+      <div class="bio-text reveal">
+        <p class="section-label">About Me</p>
+        <h2 class="section-title">People-first,<br>data-informed.</h2>
+        <div class="section-divider"></div>
+        <p>I'm an HR professional with <strong>over 8 years of experience</strong> spanning talent acquisition, organizational development, and HR technology. I've partnered with fast-scaling startups and established enterprises alike to build hiring pipelines that actually work — and cultures that retain the people you fight hard to bring in.</p>
+        <p>My approach is straightforward: combine <strong>structured process with genuine human connection</strong>. I believe the best hires come from knowing exactly what a team needs, not just matching keywords on a résumé. And the best cultures are built through intentional design, not luck.</p>
+        <p>When I'm not optimizing a hiring funnel or facilitating a calibration session, you'll find me mentoring early-career HR practitioners and speaking at local industry meetups.</p>
+        <div class="bio-pills">
+          <span class="pill">Talent Acquisition</span>
+          <span class="pill">Employer Branding</span>
+          <span class="pill">HRIS Implementation</span>
+          <span class="pill">Organizational Design</span>
+          <span class="pill">DEI Strategy</span>
+          <span class="pill">Performance Management</span>
+          <span class="pill">Onboarding</span>
+          <span class="pill">HR Analytics</span>
+        </div>
+      </div>
+      <div class="bio-aside reveal">
+        <div class="bio-card">
+          <div class="bio-card-title">Current Role</div>
+          <div class="bio-card-value">Senior HR Business Partner</div>
+        </div>
+        <div class="bio-card">
+          <div class="bio-card-title">Industry Focus</div>
+          <div class="bio-card-value">Tech, SaaS &amp; Professional Services</div>
+        </div>
+        <div class="bio-card">
+          <div class="bio-card-title">Certification</div>
+          <div class="bio-card-value">SHRM-CP · PHR Certified</div>
+        </div>
+        <div class="bio-card">
+          <div class="bio-card-title">Education</div>
+          <div class="bio-card-value">B.S. Psychology, University of the Philippines</div>
+        </div>
+        <div class="bio-card">
+          <div class="bio-card-title">Location</div>
+          <div class="bio-card-value">Metro Manila, Philippines · Open to Remote</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WINS -->
+<section id="wins">
+  <div class="section-inner">
+    <p class="section-label reveal">Recruitment Wins</p>
+    <h2 class="section-title reveal" style="color:var(--cream)">Results that speak<br><em style="font-style:italic;color:var(--terracotta)">for themselves.</em></h2>
+    <div class="section-divider" style="background:var(--gold);"></div>
+    <div class="wins-grid">
+      <div class="win-card reveal">
+        <div class="win-number">62%</div>
+        <div class="win-title">Faster Time-to-Fill</div>
+        <div class="win-desc">Redesigned the end-to-end hiring process at a 200-person SaaS company — cutting average time-to-fill from 52 days to 20 by introducing structured interview loops and a talent pipeline program.</div>
+      </div>
+      <div class="win-card reveal">
+        <div class="win-number">400+</div>
+        <div class="win-title">Successful Placements</div>
+        <div class="win-desc">Sourced, screened, and placed over 400 candidates across engineering, product, sales, and operations roles — from individual contributors to VP-level hires — in the last 5 years alone.</div>
+      </div>
+      <div class="win-card reveal">
+        <div class="win-number">92%</div>
+        <div class="win-title">12-Month Retention Rate</div>
+        <div class="win-desc">Achieved a 92% one-year retention rate across new hires by overhauling the onboarding program and introducing a 90-day manager check-in cadence and structured buddy system.</div>
+      </div>
+      <div class="win-card reveal">
+        <div class="win-number">3×</div>
+        <div class="win-title">Offer Acceptance Rate</div>
+        <div class="win-desc">Tripled offer acceptance rate by revamping compensation benchmarking and rewriting job descriptions using data-driven candidate persona research and inclusive language audits.</div>
+      </div>
+      <div class="win-card reveal">
+        <div class="win-number">38%</div>
+        <div class="win-title">Cost-per-Hire Reduction</div>
+        <div class="win-desc">Cut cost-per-hire by 38% through building a robust employee referral program and negotiating better rates with key sourcing vendors, reducing dependency on agency spend.</div>
+      </div>
+      <div class="win-card reveal">
+        <div class="win-number">2</div>
+        <div class="win-title">HRIS Migrations Led</div>
+        <div class="win-desc">Project-managed two full HRIS migrations — from BambooHR to Workday and ADP to Rippling — with zero data loss, on-time delivery, and a team adoption rate of 97% within 30 days.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TECH STACK -->
+<section id="tech">
+  <div class="section-inner">
+    <p class="section-label reveal">HR Tech Stack</p>
+    <h2 class="section-title reveal">Tools I work<br>best with.</h2>
+    <div class="section-divider"></div>
+    <div class="tech-categories reveal">
+      <div>
+        <div class="tech-category-title">Applicant Tracking Systems</div>
+        <div class="tech-row">
+          <div class="tech-chip"><span class="tech-dot" style="background:#FF6550;"></span>Greenhouse</div>
+          <div class="tech-chip"><span class="tech-dot" style="background:#2563EB;"></span>Lever</div>
+          <div class="tech-chip"><span class="tech-dot" style="background:#7C3AED;"></span>Workable</div>
+          <div class="tech-chip"><span class="tech-dot" style="background:#0EA5E9;"></span>Jobvite</div>
+          <div class="tech-chip"><span class="tech-dot" style="background:#D97706;"></span>SmartRecruiters</div>
+        </div>
+      </div>
+      <div>
+        <div class="tech-category-title">HRIS / People Platforms</div>
+        <div class="tech-row">
+          <div class="tech-chip"><span class="tech-dot" style="background:#16A34A;"></span>Workday</div>
+          <div class="tech-chip"><span class="tech-dot" style="background:#F59E0B;"></span>BambooHR</div>
+          <div class="tech-chip"><span class="tech-dot" style="background:#7C3AED;"></span>Rippling</div>
+          <div class="tech-chip"><span class="tech-dot" style="background:#EF4444;"></span>ADP Workforce Now</div>
+          <div class="tech-chip"><span class="tech-dot" style="background:#0891B2;"></span>HiBob</div>
+        </div>
+      </div>
+      <div>
+        <div class="tech-category-title">Sourcing &amp; Talent Intelligence</div>
+        <div class="tech-row">
+          <div class="tech-chip"><span class="tech-dot" style="background:#0A66C2;"></span>LinkedIn Recruiter</div>
+          <div class="tech-chip"><span class="tech-dot" style="background:#E86C2B;"></span>Indeed</div>
+          <div class="tech-chip"><span class="tech-dot" style="background:#00A98F;"></span>SeekOut</div>
+          <div class="tech-chip"><span class="tech-dot" style="background:#6366F1;"></span>Gem</div>
+          <div class="tech-chip"><span class="tech-dot" style="background:#374151;"></span>GitHub Talent</div>
+        </div>
+      </div>
+      <div>
+        <div class="tech-category-title">Performance &amp; Engagement</div>
+        <div class="tech-row">
+          <div class="tech-chip"><span class="tech-dot" style="background:#F97316;"></span>Lattice</div>
+          <div class="tech-chip"><span class="tech-dot" style="background:#10B981;"></span>15Five</div>
+          <div class="tech-chip"><span class="tech-dot" style="background:#8B5CF6;"></span>Culture Amp</div>
+          <div class="tech-chip"><span class="tech-dot" style="background:#EC4899;"></span>Leapsome</div>
+        </div>
+      </div>
+      <div>
+        <div class="tech-category-title">Analytics &amp; Productivity</div>
+        <div class="tech-row">
+          <div class="tech-chip"><span class="tech-dot" style="background:#34D399;"></span>Google Workspace</div>
+          <div class="tech-chip"><span class="tech-dot" style="background:#2563EB;"></span>Microsoft 365</div>
+          <div class="tech-chip"><span class="tech-dot" style="background:#F59E0B;"></span>Tableau</div>
+          <div class="tech-chip"><span class="tech-dot" style="background:#4ADE80;"></span>Looker</div>
+          <div class="tech-chip"><span class="tech-dot" style="background:#06B6D4;"></span>Notion</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="contact-grid">
+      <div class="reveal">
+        <p class="section-label">Contact</p>
+        <h2 class="section-title">Let's build something<br><em style="font-style:italic;">great together.</em></h2>
+        <div class="section-divider"></div>
+        <p class="contact-intro">Whether you're looking for an HR partner, exploring a collaboration, or just want to talk shop about talent strategy — I'd love to hear from you.</p>
+        <div class="contact-links">
+          <a href="mailto:alex.reyes@email.com" class="contact-link">
+            <div class="contact-link-icon">✉️</div>
+            alex.reyes@email.com
+          </a>
+          <a href="tel:+639171234567" class="contact-link">
+            <div class="contact-link-icon">📞</div>
+            +63 917 123 4567
+          </a>
+          <a href="https://linkedin.com/in/alexreyes" target="_blank" class="contact-link">
+            <div class="contact-link-icon">💼</div>
+            linkedin.com/in/alexreyes
+          </a>
+          <a href="#" class="contact-link">
+            <div class="contact-link-icon">📍</div>
+            Imus, Cavite · Metro Manila
+          </a>
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="contact-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">First Name</label>
+              <input class="form-input" type="text" placeholder="Maria" />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Last Name</label>
+              <input class="form-input" type="text" placeholder="Santos" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email</label>
+            <input class="form-input" type="email" placeholder="hello@company.com" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Subject</label>
+            <input class="form-input" type="text" placeholder="Recruitment partnership, HRBP role, etc." />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Message</label>
+            <textarea class="form-textarea" placeholder="Tell me a bit about what you're working on..."></textarea>
+          </div>
+          <button class="form-submit">Send Message →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-name">Alex Reyes — HR Professional</div>
+  <div class="footer-copy">© 2026 · All rights reserved</div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        // Stagger siblings in the same parent
+        const siblings = [...entry.target.parentElement.querySelectorAll('.reveal')];
+        const idx = siblings.indexOf(entry.target);
+        entry.target.style.transitionDelay = (idx * 0.1) + 's';
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Form submit mock
+  document.querySelector('.form-submit').addEventListener('click', function() {
+    this.textContent = 'Message Sent ✓';
+    this.style.background = 'var(--sage)';
+    setTimeout(() => {
+      this.textContent = 'Send Message →';
+      this.style.background = '';
+    }, 3000);
+  });
+</script>
+</body>
+</html>
